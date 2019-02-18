@@ -101,4 +101,23 @@ class Articles extends ResourceAbstract
             ['attachment_ids' => $params]
         );
     }
+
+	/**
+	 * Update a translation of resource
+	 *
+	 * @param null $id
+	 * @param array $updateResourceFields
+	 * @return \stdClass|null
+	 * @throws \Zendesk\API\Exceptions\ApiResponseException
+	 * @throws \Zendesk\API\Exceptions\AuthException
+	 */
+	public function updateTranslation($id = null, array $updateResourceFields = [])
+	{
+		$route = 'help_center/articles/' . $id . '/translations/' . $this->getLocale() . '.json';
+
+		return $this->client->put(
+			$route,
+			['translation' => $updateResourceFields]
+		);
+	}
 }
